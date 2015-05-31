@@ -27,18 +27,21 @@ def difficuluty(computer_rand, diff):
         if len(computer_rand) >= 4 and len(computer_rand) <= 6:
             return True
         else:
-            word = get_word((text('/usr/share/dict/words')), "easy")
+            pass
+            # word = get_word((text('/usr/share/dict/words')), "easy")
     if get.diff.lower() == "normal":
         if len(computer_rand) >= 6 and len(computer_rand) <= 10:
             return True
         else:
-            word = get_word((text('/usr/share/dict/words')), "normal")
+            pass
+            # word = get_word((text('/usr/share/dict/words')), "normal")
 
     if get.diff.lower() == "hard":
         if len(computer_rand) >= 10:
             return True
         else:
-            word = get_word((text('/usr/share/dict/words')), "hard")
+            pass
+            # word = get_word((text('/usr/share/dict/words')), "hard")
 
 
 def game(tuple):  # Main game
@@ -126,7 +129,7 @@ def start_game():  # starts the game
         start = input("Want to play? y/n ")  # gets input to start game
         start = start.lower()  # lower case words
         if start == 'y':
-            get_diff()
+            get_word()
         if start == 'n':
             break
         else:
