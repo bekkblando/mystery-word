@@ -8,7 +8,6 @@ def text(file_to_use):  # brings in file
 
 
 def get_word(text_to_clean):  # Cleans the text
-    print("loading")
     clean_text = text_to_clean.lower().split('\n')  # lower text, put in list
     computer_rand = random.choice(clean_text)  # pick random word
     diff = get_diff()
@@ -20,8 +19,6 @@ def get_word(text_to_clean):  # Cleans the text
         elif difficuluty(computer_rand, diff) == False:
             computer_rand = random.choice(clean_text)
 
-# For some reason I dont like tuples
-
 
 def difficuluty(computer_rand, diff):
     # nothing yet
@@ -30,26 +27,22 @@ def difficuluty(computer_rand, diff):
             return True
         else:
             return False
-            # word = get_word((text('/usr/share/dict/words')), "easy")
     if diff == "normal":
         if len(computer_rand) >= 6 and len(computer_rand) <= 10:
             return True
         else:
             return False
-            # word = get_word((text('/usr/share/dict/words')), "normal")
     if diff == "hard":
         if len(computer_rand) >= 10:
             return True
         else:
             return False
-            # word = get_word((text('/usr/share/dict/words')), "hard")
 
 
-def game(tuple):  # Main game
-    # print(tuple)
+def game(underrand):  # Main game
     tried_words = []
-    underscore = tuple[0]  # Unpack the tuple
-    computer_rand = tuple[1]  # Unpack the tuple
+    underscore = underrand[0]  # Unpack the tuple
+    computer_rand = unerrand[1]  # Unpack the tuple
     lives = 8  # Starting Lives
     print("Number of Letters " + str(len(computer_rand)))  # Print word length
     checked = False  # Set to False so player lives arent deducted/initalize
@@ -62,7 +55,7 @@ def game(tuple):  # Main game
                 break
         if checked == "You Win":  # If checked equals win you win
             print("You Win")  # print you win, Do I really need to explain this
-            exit()
+            break
         Guess = input("Guess a letter ")  # Player Guess
         if is_guess_allowed(Guess, tried_words) == True:
             checked = check_guess(Guess, computer_rand, underscore)  # Run chek
@@ -75,15 +68,11 @@ def game(tuple):  # Main game
 
 
 def is_guess_allowed(Guess, tried_words):  # Guess checking
-    # if Guess.isalpha == 0:
-        # print("Not a letter")
-        # return False
     try:
         if Guess.isalpha() == False:
             print("Not a letter!")
             return False
-        int(Guess)
-        float(Guess)
+        float(Guess)  # This will fail if its not a number
         print("No Numbers")
         return False
     except:
@@ -113,14 +102,13 @@ def check_guess(Guess, computer_rand, underscore):
     if computer_rand.find(Guess) == -1:  # Check if the letters not in the word
         print(' '.join(underscore))
         return(True)  # Return true for wrong no need to keep going
-    for x in computer_rand:  # Iterate over the word and find letter
+    for x in computer_rand:  # Iterate over the word and find letter letter=x
         if x == Guess:  # You guessed it
             print("YOU GUESSED IT!")
             print("YOUS RIGHT!")
             for e, i in enumerate(computer_rand):  # Enumerate over
                 if Guess == i:
                     underscore[e] = i  # Change underscore index to the letter
-                    # print(underscore)  # Display
                     if '_' not in underscore:  # checks if you win
                         return("You Win")
             print(' '.join(underscore))
@@ -129,7 +117,7 @@ def check_guess(Guess, computer_rand, underscore):
 try:  # error checking
     assert isinstance(text('/usr/share/dict/words'), str) == True
     print("Text funciton works")
-    # assert isinstance(get_word(text('/usr/share/dict/words')), tuple) == True
+    assert isinstance(get_word(text('/usr/share/dict/words')), tuple) == True
     print("get_word function works")
     assert check_guess('a', 'anna', list('____')) == False
     assert check_guess('b', 'anna', list('____')) == True
