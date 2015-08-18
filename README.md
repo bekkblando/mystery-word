@@ -1,3 +1,4 @@
+Learned basic to intermediate python concepts.
 # Mystery Word
 
 ## Description
